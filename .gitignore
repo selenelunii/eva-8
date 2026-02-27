@@ -1,0 +1,9 @@
+eva-8
+build/
+*.o
+*.bin
+*.out
+*.ch8
+*.rom
+.vscode/
+.idea/
