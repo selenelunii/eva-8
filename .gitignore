@@ -53,11 +53,10 @@ dkms.conf
 
 #IDE
 .idea/
-.vscode/ 
+.vscode/
 
 #build
 build/
-
 
 # debug information files
 *.dwo
