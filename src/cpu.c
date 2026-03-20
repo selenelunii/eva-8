@@ -33,19 +33,19 @@ void cpu_start(CPU *cpu)
     cpu->delay = 0x0;
     cpu->sp = 0x0;
     memcpy(cpu->ram,font,sizeof(font));
-} 
+}
 void cpu_step(CPU *cpu)
 {
-    uint16_t opcode = (cpu->ram[cpu->[pc]] << 0x8) | (cpu->ram[cpu->[pc]+1]);
+    uint16_t opcode = (cpu->ram[cpu->pc] << 0x8) | (cpu->ram[cpu->pc+1]);
     uint16_t NNN = opcode & 0x0FFF;
     uint8_t NN = opcode & 0x00FF;
     uint8_t N = opcode & 0x000F;
     uint8_t X = (opcode & 0x0F00)>> 0x08;
     uint8_t y = (opcode & 0x00F0)>> 0x04;
     cpu->pc += 2;
-  
+
     switch(opcode >> 0xC)
     {
-      
+
     }
 }
