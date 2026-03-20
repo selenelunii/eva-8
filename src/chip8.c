@@ -3,7 +3,7 @@
 int chip8_start(CPU *cpu, display *display, uint8_t *buffer)
 {
     cpu_start(cpu);
-    display_draw(display);
+    display_start(display);
     return 0;
 }
 void chip8_run (CPU *cpu, display *display)
