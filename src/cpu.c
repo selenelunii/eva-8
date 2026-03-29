@@ -62,6 +62,9 @@ void cpu_step(CPU *cpu)
         case 0x7:
             cpu->v[X] += NN;
             break;
+        case 0xA:
+            cpu->i = NNN;
+            break;
         default :
             printf("NO IMPLEMENTED\n");
     }
