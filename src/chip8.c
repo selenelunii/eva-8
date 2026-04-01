@@ -1,4 +1,6 @@
 #include "../include/chip8.h"
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_render.h>
 #include <stdio.h>
 int chip8_start(CPU *cpu, display *display, uint8_t *buffer, int size)
 {
@@ -19,9 +21,17 @@ void chip8_run (CPU *cpu, display *display)
     while(!(display->quit))
     {
         uint64_t start_time = SDL_GetTicksNS();
+        SDL_Event event; // temporal, i going to create an event.h later or something like that
+        while (SDL_PollEvent(&event))
+        {
+            if(event.type == SDL_EVENT_QUIT)
+            {
+                display->quit = true;
+            }
+        }
         for(int i = 0; i < 12; i++)
         {
-            cpu_step(cpu);SDL_DelayPrecise(NS_CYCLE);
+            cpu_step(cpu);
         }
         uint64_t end_time = SDL_GetTicksNS();
         uint64_t work_time = start_time - end_time;
