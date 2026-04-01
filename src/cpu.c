@@ -42,6 +42,7 @@ void cpu_step(CPU *cpu)
     uint8_t N = opcode & 0x000F;
     uint8_t X = (opcode & 0x0F00)>> 0x08;
     uint8_t Y = (opcode & 0x00F0)>> 0x04;
+    printf("INSTRUCTION: 0x%x \n",opcode);
     cpu->pc += 2;
     switch(opcode >> 0xC)
     {
