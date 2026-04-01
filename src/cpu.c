@@ -41,11 +41,32 @@ void cpu_step(CPU *cpu)
     uint8_t NN = opcode & 0x00FF;
     uint8_t N = opcode & 0x000F;
     uint8_t X = (opcode & 0x0F00)>> 0x08;
-    uint8_t y = (opcode & 0x00F0)>> 0x04;
+    uint8_t Y = (opcode & 0x00F0)>> 0x04;
+    printf("INSTRUCTION: 0x%x \n",opcode);
     cpu->pc += 2;
-
     switch(opcode >> 0xC)
     {
-
+        case 0x0:
+            switch(NN)
+            {
+                case 0xE0:
+                    memset(cpu->display, 0x00, sizeof(cpu->display));
+                    break;
+            }
+            break;
+        case 0x1:
+            cpu->pc = NNN;
+            break;
+        case 0x6:
+            cpu->v[X] = NN;
+            break;
+        case 0x7:
+            cpu->v[X] += NN;
+            break;
+        case 0xA:
+            cpu->i = NNN;
+            break;
+        default :
+            printf("NO IMPLEMENTED\n");
     }
 }

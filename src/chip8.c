@@ -18,7 +18,17 @@ void chip8_run (CPU *cpu, display *display)
     printf("WIP\n");
     while(!(display->quit))
     {
-
+        uint64_t start_time = SDL_GetTicksNS();
+        for(int i = 0; i < 12; i++)
+        {
+            cpu_step(cpu);SDL_DelayPrecise(NS_CYCLE);
+        }
+        uint64_t end_time = SDL_GetTicksNS();
+        uint64_t work_time = start_time - end_time;
+        if (work_time < NS_CYCLE)
+        {
+            SDL_DelayPrecise(NS_CYCLE - work_time);
+        }
     }
 }
 void chip8_down(CPU *cpu, display *display)
