@@ -34,7 +34,7 @@ void chip8_run (CPU *cpu, display *display)
             cpu_step(cpu);
         }
         uint64_t end_time = SDL_GetTicksNS();
-        uint64_t work_time = start_time - end_time;
+        uint64_t work_time = end_time - start_time;
         if (work_time < NS_CYCLE)
         {
             SDL_DelayPrecise(NS_CYCLE - work_time);
