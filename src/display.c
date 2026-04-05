@@ -1,5 +1,6 @@
 #include "../include/display.h"
 #include <SDL3/SDL_error.h>
+#include <SDL3/SDL_render.h>
 #include <stdio.h>
 int display_start (display *display)
 {
@@ -27,9 +28,15 @@ int display_start (display *display)
     display->quit = false;
     return 0;
 }
-void display_draw (display *display)
+void display_draw (display *display, uint8_t *buffer)
 {
-
+    for(int i = 0; i < (WIDTH *  HEIGHT); i++)
+    {
+        display->real_display[i] = buffer[i] ? 0x00FFFFFF : 0x00000000;
+    }
+    SDL_UpdateTexture(display->texture,NULL,display->real_display, 64 * sizeof(uint32_t));
+    SDL_RenderTexture(display->render,display->texture,NULL,NULL);
+    SDL_RenderPresent(display->render);
 }
 void display_close (display *display)
 {
