@@ -42,6 +42,9 @@ void cpu_step(CPU *cpu)
     uint8_t N = opcode & 0x000F;
     uint8_t X = (opcode & 0x0F00)>> 0x08;
     uint8_t Y = (opcode & 0x00F0)>> 0x04;
+    uint8_t pixel_x;
+    uint8_t pixel_y;
+    uint8_t pixel;
     printf("INSTRUCTION: 0x%x \n",opcode);
     cpu->pc += 2;
     switch(opcode >> 0xC)
@@ -65,6 +68,26 @@ void cpu_step(CPU *cpu)
             break;
         case 0xA:
             cpu->i = NNN;
+            break;
+        case 0xD:
+            pixel_x = cpu->v[X] % 64;
+            pixel_y = cpu->v[Y] % 32;
+            cpu->v[0x0F] = 0;
+            for (int col = 0; col < N; col++)
+            {
+                for(int row = 0; row < 8; row++)
+                {
+                    if ((pixel_x + row < 64) && (pixel_y + col < 32))
+                    {
+                        pixel = (cpu->ram[cpu->i + col] >> (7 - row)) &  0x01;
+                        if ((cpu->display[(pixel_x + row) + (pixel_y + col * 64)] == 1) && (pixel) == 1)
+                        {
+                            cpu->v[0x0F] = 1;
+                        }
+                        cpu->display [(pixel_x + row) + ((pixel_y + col ) * 64 )] ^= pixel;
+                    }
+                }
+            }
             break;
         default :
             printf("NO IMPLEMENTED\n");
