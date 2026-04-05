@@ -1,6 +1,7 @@
 #include "../include/display.h"
 #include <SDL3/SDL_error.h>
 #include <SDL3/SDL_render.h>
+#include <SDL3/SDL_surface.h>
 #include <stdio.h>
 int display_start (display *display)
 {
@@ -25,6 +26,7 @@ int display_start (display *display)
         fprintf(stderr,"ERROR creating texture: %s", SDL_GetError());
         return 1;
     }
+    SDL_SetTextureScaleMode(display->texture, SDL_SCALEMODE_PIXELART);
     display->quit = false;
     return 0;
 }
