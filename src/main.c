@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
     chip8_start(&cpu_instance,&display_instance,buffer, file_size);
     chip8_run(&cpu_instance, &display_instance);
     chip8_down(&cpu_instance, &display_instance);
+    free(buffer);
     return 0;
 }
 int size_rom(FILE *file)
