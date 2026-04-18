@@ -32,8 +32,8 @@ ifeq ($(BUILD),debug)
 	$(CC) -MD $(DFLAGS) $(CFLAGS) -c $< -o $@
 else
 	$(CC) -MD $(CFLAGS) -c $< -o $@
--include $(OBJDIR)*.d
 endif
+-include $(OBJDIR)*.d
 
 clean:
 	rm -rf $(TARGET) $(OBJDIR)*.o $(OBJDIR)*.d
