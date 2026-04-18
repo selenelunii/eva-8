@@ -1,7 +1,4 @@
-#include "../include/display.h"
-#include <SDL3/SDL_error.h>
-#include <SDL3/SDL_render.h>
-#include <SDL3/SDL_surface.h>
+#include "display.h"
 #include <stdio.h>
 int display_start (display *display)
 {
