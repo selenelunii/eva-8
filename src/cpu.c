@@ -195,6 +195,9 @@ void cpu_step(CPU *cpu)
                 case 0x15:
                     cpu->delay = cpu->v[X];
                     break;
+                case 0x18:
+                    cpu->sound = cpu->v[X];
+                    break;
             }
             break;
         default :
