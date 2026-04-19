@@ -192,6 +192,9 @@ void cpu_step(CPU *cpu)
                 case 0x07:
                     cpu->v[X] = cpu->delay;
                     break;
+                case 0x15:
+                    cpu->delay = cpu->v[X];
+                    break;
             }
             break;
         default :
