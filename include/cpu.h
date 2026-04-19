@@ -15,4 +15,5 @@ typedef struct
 }CPU;
 void cpu_start(CPU *cpu);
 void cpu_step(CPU *cpu);
-#endif 
+void update_timers(CPU *cpu);
+#endif

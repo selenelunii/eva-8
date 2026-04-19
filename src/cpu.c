@@ -190,3 +190,15 @@ void cpu_step(CPU *cpu)
             printf("INSTRUCTION NOT IMPLEMENTED: 0x%x in Memory address [0x%x] \n", opcode >> 0xC, (cpu->pc) - 2 );
     }
 }
+
+void update_timers(CPU *cpu)
+{
+    if (cpu->delay > 0)
+    {
+        cpu->delay--;
+    }
+    if (cpu->sound > 0)
+    {
+        cpu->sound--;
+    }
+}
