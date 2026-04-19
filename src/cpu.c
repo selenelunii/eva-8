@@ -45,7 +45,6 @@ void cpu_step(CPU *cpu)
     uint8_t pixel_x;
     uint8_t pixel_y;
     uint8_t pixel;
-    printf("INSTRUCTION: 0x%x \n",opcode);
     cpu->pc += 2;
     switch(opcode >> 0xC)
     {
@@ -90,6 +89,6 @@ void cpu_step(CPU *cpu)
             }
             break;
         default :
-            printf("NO IMPLEMENTED\n");
+
     }
 }
