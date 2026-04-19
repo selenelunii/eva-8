@@ -74,6 +74,12 @@ void cpu_step(CPU *cpu)
                 cpu->pc += 2;
             }
             break;
+        case 0x4:
+            if(cpu->v[X] != NN)
+            {
+                cpu->pc += 2;
+            }
+            break;
         case 0x6:
             cpu->v[X] = NN;
             break;
