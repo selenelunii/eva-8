@@ -92,6 +92,64 @@ void cpu_step(CPU *cpu)
         case 0x7:
             cpu->v[X] += NN;
             break;
+        case 0x8:
+            switch(N)
+            {
+                case 0x0:
+                    cpu->v[X] = cpu->v[Y];
+                    break;
+                case 0x1:
+                    cpu->v[X] |= cpu->v[Y];
+                    break;
+                case 0x2:
+                    cpu->v[X] &= cpu->v[Y];
+                    break;
+                case 0x3:
+                    cpu->v[X] ^= cpu->v[Y];
+                    break;
+                case 0x4:
+                    if((uint16_t) cpu->v[X] + (uint16_t) cpu->v[Y] > 255 )
+                    {
+                        cpu->v[0xF] = 1;
+                    }
+                    else
+                    {
+                        cpu->v[0xF] = 0;
+                    }
+                    cpu->v[X] += cpu->v[Y];
+                    break;
+                case 0x5:
+                    if(cpu->v[X] >= cpu->v[Y])
+                    {
+                        cpu->v[0xF] = 1;
+                    }
+                    else
+                    {
+                        cpu->v[0xF] = 0;
+                    }
+                    cpu->v[X] = cpu->v[X] - cpu->v[Y];
+                    break;
+                case 0x6:
+                    cpu->v[X] = cpu->v[Y] >> 1;
+                    cpu->v[0xF] = cpu->v[Y] & 0x1;
+                    break;
+                case 0x7:
+                    if(cpu->v[Y] >= cpu->v[X])
+                    {
+                        cpu->v[0xF] = 1;
+                    }
+                    else
+                    {
+                        cpu->v[0xF] = 0;
+                    }
+                    cpu->v[X] = cpu->v[Y] - cpu->v[X];
+                    break;
+                case 0xE:
+                    cpu->v[X] = cpu->v[Y] << 1;
+                    cpu->v[0xF] = (cpu->v[Y] & 0x80) >> 7;
+                    break;
+            }
+            break;
         case 0x9:
             if(cpu->v[X] != cpu->v[Y])
             {
