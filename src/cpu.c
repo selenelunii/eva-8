@@ -186,6 +186,14 @@ void cpu_step(CPU *cpu)
                 }
             }
             break;
+        case 0xF:
+            switch(NN)
+            {
+                case 0x07:
+                    cpu->v[X] = cpu->delay;
+                    break;
+            }
+            break;
         default :
             printf("INSTRUCTION NOT IMPLEMENTED: 0x%x in Memory address [0x%x] \n", opcode >> 0xC, (cpu->pc) - 2 );
     }
