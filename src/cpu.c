@@ -80,6 +80,12 @@ void cpu_step(CPU *cpu)
                 cpu->pc += 2;
             }
             break;
+        case 0x5:
+            if(cpu->v[X] == cpu->v[Y])
+            {
+                cpu->pc += 2;
+            }
+            break;
         case 0x6:
             cpu->v[X] = NN;
             break;
