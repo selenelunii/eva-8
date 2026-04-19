@@ -92,6 +92,12 @@ void cpu_step(CPU *cpu)
         case 0x7:
             cpu->v[X] += NN;
             break;
+        case 0x9:
+            if(cpu->v[X] != cpu->v[Y])
+            {
+                cpu->pc += 2;
+            }
+            break;
         case 0xA:
             cpu->i = NNN;
             break;
