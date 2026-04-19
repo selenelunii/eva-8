@@ -54,9 +54,18 @@ void cpu_step(CPU *cpu)
                 case 0xE0:
                     memset(cpu->display, 0x00, sizeof(cpu->display));
                     break;
+                case 0xEE:
+                    cpu->sp--;
+                    cpu->pc = cpu->stack[cpu->sp];
+                    break;
             }
             break;
         case 0x1:
+            cpu->pc = NNN;
+            break;
+        case 0x2:
+            cpu->stack[cpu->sp] = cpu->pc;
+            cpu->sp++;
             cpu->pc = NNN;
             break;
         case 0x6:
@@ -79,7 +88,7 @@ void cpu_step(CPU *cpu)
                     if ((pixel_x + row < 64) && (pixel_y + col < 32))
                     {
                         pixel = (cpu->ram[cpu->i + col] >> (7 - row)) &  0x01;
-                        if ((cpu->display[(pixel_x + row) + (pixel_y + col * 64)] == 1) && (pixel) == 1)
+                        if ((cpu->display[(pixel_x + row) + ((pixel_y + col) * 64)] == 1) && (pixel) == 1)
                         {
                             cpu->v[0x0F] = 1;
                         }
