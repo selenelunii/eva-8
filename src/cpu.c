@@ -159,6 +159,9 @@ void cpu_step(CPU *cpu)
         case 0xA:
             cpu->i = NNN;
             break;
+        case 0xB:
+            cpu->pc = NNN + cpu->v[0x0];
+            break;
         case 0xD:
             pixel_x = cpu->v[X] % 64;
             pixel_y = cpu->v[Y] % 32;
