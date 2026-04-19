@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 int size_rom(FILE *file);
 int main(int argc, char* argv[])
 {
@@ -25,6 +26,7 @@ int main(int argc, char* argv[])
         fprintf(stderr,"ERROR ALLOCATING MEMORY\n");
         return 1;
     }
+    srand(time(NULL));
     fread(buffer,sizeof(uint8_t), file_size, file);
     fclose(file);
     chip8_start(&cpu_instance,&display_instance,buffer, file_size);

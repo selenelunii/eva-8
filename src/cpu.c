@@ -1,6 +1,7 @@
 #include "cpu.h"
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 static const uint8_t font[] =
 {
@@ -161,6 +162,9 @@ void cpu_step(CPU *cpu)
             break;
         case 0xB:
             cpu->pc = NNN + cpu->v[0x0];
+            break;
+        case 0xC:
+            cpu->v[X] = (rand() % 256) & NN;
             break;
         case 0xD:
             pixel_x = cpu->v[X] % 64;
