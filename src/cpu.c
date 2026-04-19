@@ -101,6 +101,9 @@ void cpu_step(CPU *cpu)
                 case 0x1:
                     cpu->v[X] |= cpu->v[Y];
                     break;
+                case 0x2:
+                    cpu->v[X] &= cpu->v[Y];
+                    break;
             }
             break;
         case 0x9:
