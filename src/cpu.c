@@ -144,6 +144,10 @@ void cpu_step(CPU *cpu)
                     }
                     cpu->v[X] = cpu->v[Y] - cpu->v[X];
                     break;
+                case 0xE:
+                    cpu->v[X] = cpu->v[Y] << 1;
+                    cpu->v[0xF] = (cpu->v[Y] & 0x80) >> 7;
+                    break;
             }
             break;
         case 0x9:
