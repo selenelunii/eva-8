@@ -2,6 +2,7 @@
 #include <stdio.h>
 int chip8_start(CPU *cpu, display *display, uint8_t *buffer, int size)
 {
+    printf("EVA-8 STARTING \n");
     cpu_start(cpu);
     memcpy((cpu->ram)+0x200,buffer,size);
     display_start(display);
@@ -35,5 +36,6 @@ void chip8_run (CPU *cpu, display *display)
 }
 void chip8_down(CPU *cpu, display *display)
 {
+    printf("GOODBYE WORLD!\n");
     display_close(display);
 }
