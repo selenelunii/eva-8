@@ -201,6 +201,9 @@ void cpu_step(CPU *cpu)
                 case 0x18:
                     cpu->sound = cpu->v[X];
                     break;
+                case 0x29:
+                    cpu->i = cpu->v[X] * 5;
+                    break;
             }
             break;
         default :
