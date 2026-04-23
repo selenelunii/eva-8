@@ -25,6 +25,7 @@ void chip8_run (CPU *cpu, display *display)
         {
             cpu_step(cpu);
         }
+        update_timers(cpu);
         display_draw(display, cpu->display);
         uint64_t end_time = SDL_GetTicksNS();
         uint64_t work_time = end_time - start_time;

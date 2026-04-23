@@ -186,7 +186,33 @@ void cpu_step(CPU *cpu)
                 }
             }
             break;
+        case 0xF:
+            switch(NN)
+            {
+                case 0x07:
+                    cpu->v[X] = cpu->delay;
+                    break;
+                case 0x15:
+                    cpu->delay = cpu->v[X];
+                    break;
+                case 0x18:
+                    cpu->sound = cpu->v[X];
+                    break;
+            }
+            break;
         default :
             printf("INSTRUCTION NOT IMPLEMENTED: 0x%x in Memory address [0x%x] \n", opcode >> 0xC, (cpu->pc) - 2 );
+    }
+}
+
+void update_timers(CPU *cpu)
+{
+    if (cpu->delay > 0)
+    {
+        cpu->delay--;
+    }
+    if (cpu->sound > 0)
+    {
+        cpu->sound--;
     }
 }
