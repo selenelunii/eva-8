@@ -8,8 +8,8 @@ TARGET := eva-8
 OBJDIR := build/
 SRCDIR := src/
 
-CFILES := $(SRCDIR)main.c $(SRCDIR)cpu.c $(SRCDIR)display.c $(SRCDIR)chip8.c
-OBJS := $(OBJDIR)main.o $(OBJDIR)cpu.o $(OBJDIR)display.o $(OBJDIR)chip8.o
+CFILES := $(SRCDIR)main.c $(SRCDIR)cpu.c $(SRCDIR)display.c $(SRCDIR)chip8.c $(SRCDIR)input.c
+OBJS := $(OBJDIR)main.o $(OBJDIR)cpu.o $(OBJDIR)display.o $(OBJDIR)chip8.o $(OBJDIR)input.o
 LIBS := -lSDL3
 
 DFLAGS := -g -fsanitize=address,undefined,leak -fno-omit-frame-pointer
