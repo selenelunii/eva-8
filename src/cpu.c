@@ -192,11 +192,36 @@ void cpu_step(CPU *cpu)
                 case 0x07:
                     cpu->v[X] = cpu->delay;
                     break;
+                case 0x1E:
+                    cpu->i += cpu->v[X];
+                    break;
                 case 0x15:
                     cpu->delay = cpu->v[X];
                     break;
                 case 0x18:
                     cpu->sound = cpu->v[X];
+                    break;
+                case 0x29:
+                    cpu->i = cpu->v[X] * 5;
+                    break;
+                case 0x33:
+                    cpu->ram[cpu->i] =  cpu->v[X] / 100 ;
+                    cpu->ram[cpu->i + 1] = (cpu->v[X] % 100) / 10;
+                    cpu->ram[cpu->i + 2] = cpu->v[X] % 10;
+                    break;
+                case 0x55:
+                    for (int i = 0; i <= X; i++)
+                    {
+                        cpu->ram[cpu->i] = cpu->v[i];
+                        cpu->i++;
+                    }
+                    break;
+                case 0x65:
+                    for (int i = 0; i <= X; i++)
+                    {
+                        cpu->v[i] = cpu->ram[cpu->i];
+                        cpu->i++;
+                    }
                     break;
             }
             break;
