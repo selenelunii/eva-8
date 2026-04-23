@@ -218,12 +218,13 @@ void cpu_step(CPU *cpu)
                             cpu->v[X] = i;
                             pressed = true;
                         }
-                        if(!pressed)
-                        {
-                            cpu->pc -= 2;
-                        }
-                    }
 
+                    }
+                    if(!pressed)
+                    {
+                        cpu->pc -= 2;
+                    }
+                    break;
                 case 0x1E:
                     cpu->i += cpu->v[X];
                     break;
