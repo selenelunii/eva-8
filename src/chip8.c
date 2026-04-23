@@ -1,5 +1,6 @@
 #include "chip8.h"
 #include <stdio.h>
+#include "input.h"
 int chip8_start(CPU *cpu, display *display, uint8_t *buffer, int size)
 {
     printf("EVA-8 STARTING \n");
@@ -13,14 +14,7 @@ void chip8_run (CPU *cpu, display *display)
     while(!(display->quit))
     {
         uint64_t start_time = SDL_GetTicksNS();
-        SDL_Event event; // temporal, i going to create an event.h later or something like that
-        while (SDL_PollEvent(&event))
-        {
-            if(event.type == SDL_EVENT_QUIT)
-            {
-                display->quit = true;
-            }
-        }
+        event(cpu, display);
         for(int i = 0; i < 12; i++)
         {
             cpu_step(cpu);

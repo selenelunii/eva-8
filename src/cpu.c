@@ -46,6 +46,7 @@ void cpu_step(CPU *cpu)
     uint8_t pixel_x;
     uint8_t pixel_y;
     uint8_t pixel;
+    bool pressed = false;
     cpu->pc += 2;
     switch(opcode >> 0xC)
     {
@@ -186,12 +187,43 @@ void cpu_step(CPU *cpu)
                 }
             }
             break;
+        case 0xE:
+            switch(NN)
+            {
+                case 0x9E:
+                    if(cpu->keyboard[cpu->v[X]])
+                    {
+                        cpu->pc += 2;
+                    }
+                    break;
+                case 0xA1:
+                    if(!cpu->keyboard[cpu->v[X]])
+                    {
+                        cpu->pc += 2;
+                    }
+                    break;
+            }
+            break;
         case 0xF:
             switch(NN)
             {
                 case 0x07:
                     cpu->v[X] = cpu->delay;
                     break;
+                case 0x0A:
+                    for(int i = 0; i <= 0xF; i++)
+                    {
+                        if(cpu->keyboard[i])
+                        {
+                            cpu->v[X] = i;
+                            pressed = true;
+                        }
+                        if(!pressed)
+                        {
+                            cpu->pc -= 2;
+                        }
+                    }
+
                 case 0x1E:
                     cpu->i += cpu->v[X];
                     break;
