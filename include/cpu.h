@@ -12,6 +12,7 @@ typedef struct
     uint8_t v[0x10];
     uint8_t delay;
     uint8_t sound;
+    bool keyboard[0xF];
 }CPU;
 void cpu_start(CPU *cpu);
 void cpu_step(CPU *cpu);
