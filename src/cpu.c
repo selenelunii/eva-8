@@ -209,6 +209,20 @@ void cpu_step(CPU *cpu)
                     cpu->ram[cpu->i + 1] = (cpu->v[X] % 100) / 10;
                     cpu->ram[cpu->i + 2] = cpu->v[X] % 10;
                     break;
+                case 0x55:
+                    for (int i = 0; i <= X; i++)
+                    {
+                        cpu->ram[cpu->i] = cpu->v[i];
+                        cpu->i++;
+                    }
+                    break;
+                case 0x65:
+                    for (int i = 0; i <= X; i++)
+                    {
+                        cpu->v[i] = cpu->ram[cpu->i];
+                        cpu->i++;
+                    }
+                    break;
             }
             break;
         default :
